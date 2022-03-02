@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 export default function AvailableService(props) {
     const { title, price, media, cause } = props.item;
     return (
-        <TouchableOpacity onPress={() => props.navigation.navigate("Current service")}>
+        <TouchableOpacity onPress={() => props.navigation.push("Current service", { id: props.id })}>
             <View style={styles.container}>
                 <Image
                     style={styles.image}

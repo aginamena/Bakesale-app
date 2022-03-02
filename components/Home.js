@@ -28,7 +28,10 @@ function Home({ navigation }) {
                         />
                         <FlatList
                             data={data}
-                            renderItem={({ item }) => <AvailableService item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <AvailableService
+                                item={item} navigation={navigation}
+                                id={item.key}
+                            />}
                         />
                     </>
 
