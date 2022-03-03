@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from "react-native";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import React, { useEffect, useState, useRef } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Dimensions } from "react-native";
+import Carousel from "react-native-snap-carousel";
 import globalStyle from "../styles/globalStyles";
+import CarouselItem, { sliderWidth } from "./CarouselItem";
 
 export default function Service({ route }) {
     const [data, setData] = useState(null);
@@ -13,7 +14,8 @@ export default function Service({ route }) {
         setLoading(false)
     }
         , [])
-
+    const sliderWidth = Dimensions.get("window").width + 80;
+    const isCarousel = useRef(null)
     return (
         <View style={styles.container}>
             {
@@ -23,6 +25,15 @@ export default function Service({ route }) {
                     </View>
                     :
                     <ScrollView>
+                        <Carousel
+                            layout={'default'}
+                            ref={isCarousel}
+                            data={data.media}
+                            renderItem={CarouselItem}
+                            sliderWidth={sliderWidth}
+                            itemWidth={Math.round(sliderWidth * 0.7)}
+                        />
+
                         <View style={styles.titleContainer}>
                             <Text style={[globalStyle.text, { fontWeight: "bold" }]}>{data.title}</Text>
                         </View>
