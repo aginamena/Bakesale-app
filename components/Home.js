@@ -1,5 +1,6 @@
+import { Formik } from "formik";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, TextInput } from "react-native";
+import { StyleSheet, Text, View, FlatList, TextInput, TouchableOpacity, Button } from "react-native";
 import AvailableService from "./AvailableService";
 
 function Home({ navigation }) {
@@ -13,6 +14,15 @@ function Home({ navigation }) {
             setLoading(false);
         }
         , [])
+
+    async function serachByKeyword(searchTerm) {
+        setLoading(true);
+        const response = await fetch("https://bakesaleforgood.com/api/deals?searchTerm=" + searchTerm);
+        const data = await response.json();
+        setData(data);
+        setLoading(false);
+    }
+
     return (
         <View style={styles.container}>
             {
@@ -22,10 +32,28 @@ function Home({ navigation }) {
                     </View>
                     :
                     <>
-                        <TextInput
-                            placeholder="Search All Deals..."
-                            style={styles.textInput}
-                        />
+                        <Formik
+                            initialValues={{ searchTerm: "" }}
+                            onSubmit={value => serachByKeyword(value.searchTerm)}
+                        >
+                            {
+                                (props) => (
+                                    <View style={styles.formikContainer}>
+                                        <TextInput
+                                            placeholder="Search All Deals..."
+                                            style={[styles.textInput, { paddingLeft: 10, width: 300 }]}
+                                            onChangeText={props.handleChange("searchTerm")}
+                                            values={props.values.searchTerm}
+                                        />
+                                        <Button onPress={props.handleSubmit} title="submit">
+
+                                        </Button>
+                                    </View>
+                                )
+                            }
+
+                        </Formik>
+
                         <FlatList
                             data={data}
                             renderItem={({ item }) => <AvailableService
@@ -59,5 +87,13 @@ const styles = StyleSheet.create({
         height: 50,
         width: 380,
         fontSize: 17
+    },
+    formikContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        width: 380,
+        justifyContent: "space-between",
+        marginTop: 10,
+        marginBottom: 10
     }
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Dimensions } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import globalStyle from "../styles/globalStyles";
 import CarouselItem, { sliderWidth } from "./CarouselItem";
@@ -14,7 +14,6 @@ export default function Service({ route }) {
         setLoading(false)
     }
         , [])
-    const sliderWidth = Dimensions.get("window").width + 80;
     const isCarousel = useRef(null)
     return (
         <View style={styles.container}>
@@ -35,7 +34,7 @@ export default function Service({ route }) {
                         />
 
                         <View style={styles.titleContainer}>
-                            <Text style={[globalStyle.text, { fontWeight: "bold" }]}>{data.title}</Text>
+                            <Text style={[globalStyle.text, { fontWeight: "bold", paddingTop: 20, paddingBottom: 20 }]}>{data.title}</Text>
                         </View>
                         <View style={styles.profile}>
                             <View>
@@ -52,7 +51,9 @@ export default function Service({ route }) {
                         </View>
                         <View style={styles.desNBtnCon}>
                             <Text style={globalStyle.text}>{data.description}</Text>
-                            <TouchableOpacity style={styles.btn}>
+                            <TouchableOpacity
+                                style={styles.btn}
+                                onPress={() => Linking.openURL("https://bakesaleforgood.com/api/deals/" + route.params.id)}>
                                 <Text style={[globalStyle.text, styles.btnText]}>Buy this deal!</Text>
                             </TouchableOpacity>
                         </View>
@@ -103,7 +104,6 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         backgroundColor: "orange",
-        height: 80,
         justifyContent: "center",
         paddingLeft: 20,
     }
