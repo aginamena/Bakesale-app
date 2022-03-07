@@ -14,8 +14,8 @@ export default function AvailableService(props) {
                 <View style={styles.serviceContainer}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.serviceDescription}>
-                        <Text style={{ fontSize: 16 }}>{cause.name}</Text>
-                        <Text style={{ fontSize: 16 }}>{price}</Text>
+                        <Text style={{ fontSize: 16, letterSpacing: 1.5 }}>{cause.name}</Text>
+                        <Text style={{ fontSize: 16, letterSpacing: 1.5 }}>{price}</Text>
                     </View>
 
                 </View>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         marginBottom: 5,
         fontWeight: "bold",
+        letterSpacing: 1.5
     },
     serviceDescription: {
         flexDirection: "row",

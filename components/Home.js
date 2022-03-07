@@ -6,21 +6,28 @@ import AvailableService from "./AvailableService";
 function Home({ navigation }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [searchedData, setSearchedData] = useState("");
     useEffect(
         async () => {
-            const response = await fetch("https://bakesaleforgood.com/api/deals");
-            const data = await response.json();
-            setData(data);
-            setLoading(false);
+            try {
+                const response = await fetch("https://bakesaleforgood.com/api/deals");
+                const data = await response.json();
+                setData(data);
+                setLoading(false);
+            } catch (error) {
+                console.log("An error occured")
+                console.log(error)
+            }
+
         }
         , [])
 
-    async function serachByKeyword(searchTerm) {
-        setLoading(true);
-        const response = await fetch("https://bakesaleforgood.com/api/deals?searchTerm=" + searchTerm);
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
+    function handleSubmit(searchTerm) {
+        if (searchTerm.length > 1) {
+            navigation.push("searched", { searchTerm })
+        } else {
+            alert("Enter a search term")
+        }
     }
 
     return (
@@ -32,27 +39,16 @@ function Home({ navigation }) {
                     </View>
                     :
                     <>
-                        <Formik
-                            initialValues={{ searchTerm: "" }}
-                            onSubmit={value => serachByKeyword(value.searchTerm)}
-                        >
-                            {
-                                (props) => (
-                                    <View style={styles.formikContainer}>
-                                        <TextInput
-                                            placeholder="Search All Deals..."
-                                            style={[styles.textInput, { paddingLeft: 10, width: 300 }]}
-                                            onChangeText={props.handleChange("searchTerm")}
-                                            values={props.values.searchTerm}
-                                        />
-                                        <Button onPress={props.handleSubmit} title="submit">
-
-                                        </Button>
-                                    </View>
-                                )
-                            }
-
-                        </Formik>
+                        <View style={styles.formikContainer}>
+                            <TextInput
+                                placeholder="Search All Deals..."
+                                style={[styles.textInput, { paddingLeft: 10, width: 300 }]}
+                                onChangeText={value => setSearchedData(value)}
+                            />
+                            <TouchableOpacity style={styles.btn} onPress={() => handleSubmit(searchedData)}>
+                                <Text style={styles.btnText}>Search</Text>
+                            </TouchableOpacity>
+                        </View>
 
                         <FlatList
                             data={data}
@@ -95,5 +91,17 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginTop: 10,
         marginBottom: 10
+    },
+    btn: {
+        backgroundColor: "#3498db",
+    },
+    btnText: {
+        color: "white",
+        fontSize: 17,
+        paddingTop: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 5,
+        letterSpacing: 1.5
     }
 })
