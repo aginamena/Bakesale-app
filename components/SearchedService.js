@@ -6,8 +6,6 @@ import AvailableService from "./AvailableService";
 export default function SearchedService({ route, navigation }) {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState(null)
-    console.log(route);
-    console.log(navigation);
     useEffect(
         async () => {
             const response = await fetch("https://bakesaleforgood.com/api/deals?searchTerm=" + route.params.searchTerm);

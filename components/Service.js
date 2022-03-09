@@ -53,7 +53,7 @@ export default function Service({ route }) {
                             <Text style={globalStyle.text}>{data.description}</Text>
                             <TouchableOpacity
                                 style={styles.btn}
-                                onPress={() => Linking.openURL("https://bakesaleforgood.com/api/deals/" + route.params.id)}>
+                                onPress={() => Linking.openURL("https://bakesaleforgood.com/")}>
                                 <Text style={[globalStyle.text, styles.btnText]}>Buy this deal!</Text>
                             </TouchableOpacity>
                         </View>

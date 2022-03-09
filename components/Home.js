@@ -42,7 +42,7 @@ function Home({ navigation }) {
                         <View style={styles.formikContainer}>
                             <TextInput
                                 placeholder="Search All Deals..."
-                                style={[styles.textInput, { paddingLeft: 10, width: 300 }]}
+                                style={[styles.textInput, { paddingLeft: 10, width: "70%" }]}
                                 onChangeText={value => setSearchedData(value)}
                             />
                             <TouchableOpacity style={styles.btn} onPress={() => handleSubmit(searchedData)}>
@@ -87,13 +87,15 @@ const styles = StyleSheet.create({
     formikContainer: {
         flexDirection: "row",
         alignItems: "center",
-        width: 380,
+        width: "100%",
         justifyContent: "space-between",
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
+
     },
     btn: {
         backgroundColor: "#3498db",
+        marginRight: 15
     },
     btnText: {
         color: "white",

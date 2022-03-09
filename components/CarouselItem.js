@@ -17,10 +17,10 @@ export default function CarouselItem({ item, index }) {
 
 const styles = StyleSheet.create({
     container: {
-        width: itemWidth
+        width: itemWidth,
     },
     image: {
         width: itemWidth,
-        height: 250
+        height: 250,
     }
 })

@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from "react-native";
 
 export default function AvailableService(props) {
     const { title, price, media, cause } = props.item;
     return (
-        <TouchableOpacity onPress={() => props.navigation.push("Current service", { id: props.id })}>
+        <TouchableOpacity onPress={() => props.navigation.push("Current service", { id: props.id })}
+        >
             <View style={styles.container}>
                 <Image
                     style={styles.image}
@@ -27,7 +28,7 @@ export default function AvailableService(props) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 380,
+        width: "100%",
         marginBottom: 30,
     },
     image: {
