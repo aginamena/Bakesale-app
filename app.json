@@ -1,21 +1,20 @@
 {
   "expo": {
-    "name": "Bakesale",
+    "name": "BakeSale",
+    "description": "You can search for any service on the app and we'll let you know if that deal is currently available. If you like the deal, you can go ahead to to buy the deal. ",
     "slug": "Bakesale",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/favicon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/image.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
